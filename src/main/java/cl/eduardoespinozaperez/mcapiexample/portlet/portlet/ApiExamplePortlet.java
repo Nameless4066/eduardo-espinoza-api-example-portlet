@@ -1,6 +1,7 @@
 package cl.eduardoespinozaperez.mcapiexample.portlet.portlet;
 
 import cl.eduardoespinozaperez.mcapiexample.portlet.constants.ApiExamplePortletKeys;
+import cl.eduardoespinozaperez.mcapiexample.portlet.data.CityProvider;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
@@ -35,7 +36,8 @@ public class ApiExamplePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
-		System.out.println("DO VIEW");
+		CityProvider cp = CityProvider.getInstance();
+		renderRequest.setAttribute("citiesList", cp.getCities());
 		
 		super.doView(renderRequest, renderResponse);
 	}
