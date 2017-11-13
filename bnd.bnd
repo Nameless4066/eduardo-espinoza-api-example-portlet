@@ -1,0 +1,4 @@
+Bundle-Name: eduardo-espinoza-mc-api-example-portlet
+Bundle-SymbolicName: cl.eduardoespinozaperez.mcapiexample.portlet
+Bundle-Version: 1.0.0
+Export-Package: cl.eduardoespinozaperez.mcapiexample.portlet.constants
