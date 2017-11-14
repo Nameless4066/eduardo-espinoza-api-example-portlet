@@ -11,6 +11,8 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -32,14 +34,22 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class ApiExamplePortlet extends MVCPortlet {
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
-		CityProvider cp = CityProvider.getInstance();
+		CityProvider cp = new CityProvider();
 		renderRequest.setAttribute("citiesList", cp.getCities());
 		
 		super.doView(renderRequest, renderResponse);
+	}
+	
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		super.serveResource(resourceRequest, resourceResponse);
 	}
 	
 }

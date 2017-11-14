@@ -8,10 +8,9 @@ import cl.eduardoespinozaperez.mcapiexample.portlet.data.model.City;
 
 public class CityProvider {
 	
-	private static final CityProvider INSTANCE = new CityProvider();
-	private static final List<City> citiesList = new ArrayList<>();
+	private List<City> citiesList = new ArrayList<>();
 	
-	private CityProvider() {
+	public CityProvider() {
 		initData();
 	}
 	
@@ -31,10 +30,6 @@ public class CityProvider {
 			citiesList.add(new City("Coyhaique", City.ZONA_SUR));
 			citiesList.add(new City("Punta Arenas", City.ZONA_SUR));
 		}
-	}
-	
-	public static CityProvider getInstance() {
-		return INSTANCE;
 	}
 	
 	public List<City> getCities(Predicate<City> cityPredicate) throws Exception{
