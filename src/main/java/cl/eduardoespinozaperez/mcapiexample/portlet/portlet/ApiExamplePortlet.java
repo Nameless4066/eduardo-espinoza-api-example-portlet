@@ -1,10 +1,5 @@
 package cl.eduardoespinozaperez.mcapiexample.portlet.portlet;
 
-import cl.eduardoespinozaperez.mcapiexample.portlet.constants.ApiExamplePortletKeys;
-import cl.eduardoespinozaperez.mcapiexample.portlet.data.CityProvider;
-
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
 import java.io.IOException;
 
 import javax.portlet.Portlet;
@@ -15,6 +10,12 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.ParamUtil;
+
+import cl.eduardoespinozaperez.mcapiexample.portlet.constants.ApiExamplePortletKeys;
+import cl.eduardoespinozaperez.mcapiexample.portlet.data.CityProvider;
 
 /**
  * @author Eduardo Espinoza Pérez
@@ -27,6 +28,7 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.display-name=Eduardo Espinoza Pérez API Example",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
+		"com.liferay.portlet.header-portlet-javascript=/js/main.js",
 		"javax.portlet.name=" + ApiExamplePortletKeys.ApiExample,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
@@ -48,7 +50,17 @@ public class ApiExamplePortlet extends MVCPortlet {
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 			throws IOException, PortletException {
-		// TODO Auto-generated method stub
+		
+		try {
+			String zona = ParamUtil.getString(resourceRequest, "zona");
+			System.out.println(zona);
+			
+			CityProvider cp = new CityProvider();
+			resourceRequest.setAttribute("citiesList", cp.getCities(x -> x.getZona().equals(zona)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 	

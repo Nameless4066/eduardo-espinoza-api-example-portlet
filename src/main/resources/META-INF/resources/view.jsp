@@ -30,23 +30,9 @@
 		<legend>Resultados</legend>
 		<h2></h2>
 	</fieldset>
+	<input type="hidden" id="api-key" value="<liferay-ui:message key="eduardo-espinoza-mc-api-example-portlet-accuweather-apikey"/>" />
+	<input type="hidden" id="portlet-url" value="<c:out value="${portletUrl}" />" />
+	<input type="hidden" id="portlet-namespace" value="<portlet:namespace />" />
 </div>
-<script>
-	$(document).ready(function(){
-		$('.city-name').change(function(){
-			$.get('http://dataservice.accuweather.com/locations/v1/cities/CL/search', {
-					apikey: '<liferay-ui:message key="eduardo-espinoza-mc-api-example-portlet-accuweather-apikey"/>',
-					q: this.value
-				 }, function(x){
-					 $.get('http://dataservice.accuweather.com/currentconditions/v1/' + x[0].Key, {
-							apikey: '<liferay-ui:message key="eduardo-espinoza-mc-api-example-portlet-accuweather-apikey"/>'
-						 }, function(d){
-							 $('.result').find('h2').text('Temperatura Actual: ' + d[0].Temperature.Metric.Value + '°C');
-							 $('.result').fadeIn(500);
-						 });
-				 });
-		});
-	});
-</script>
 
 
